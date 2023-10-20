@@ -71,6 +71,25 @@ async function run() {
 
     })
 
+    app.delete('/products/:id', async(req, res) => {
+      const id = req.params.id
+      const query = {_id : new ObjectId(id)}
+      const result = await productCollection.deleteOne(query);
+      res.send(result);
+    })
+
+   
+    
+    app.get('/cart', async(req, res) =>{
+
+      const email = req.body;
+      console.log(email);
+      const result = await cartCollection.find().toArray();
+      console.log(result);
+        res.send(result);
+
+    })
+
     app.post('/cart', async(req, res) => {
 
       const cart = req.body;
@@ -79,7 +98,6 @@ async function run() {
       res.send(result)
 
     })
-
 
     
     // Send a ping to confirm a successful connection
