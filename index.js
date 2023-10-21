@@ -111,7 +111,6 @@ app.put('/update/:id', async(req, res) => {
     app.delete('/products/:id', async(req, res) => {
       const id = req.params.id
       const query = {_id : new ObjectId(id)}
-      console.log(query);
       const result = await productCollection.deleteOne(query);
       res.send(result);
     })
@@ -150,13 +149,13 @@ app.put('/update/:id', async(req, res) => {
     })
 
 
-
+// Deleting card
 
     app.delete('/cart/:id', async(req, res) => {
       const id = req.params.id
       console.log(id);
       const query = {_id : new ObjectId(id)}
-      // console.log(query);
+      console.log(query);
       const result = await cartCollection.deleteOne(query);
       res.send(result);
     })
@@ -164,7 +163,7 @@ app.put('/update/:id', async(req, res) => {
 
 
 
-    
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
