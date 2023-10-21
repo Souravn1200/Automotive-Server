@@ -111,21 +111,34 @@ app.put('/update/:id', async(req, res) => {
     app.delete('/products/:id', async(req, res) => {
       const id = req.params.id
       const query = {_id : new ObjectId(id)}
+      console.log(query);
       const result = await productCollection.deleteOne(query);
       res.send(result);
     })
 
    
+
+
+
+
+
+
+
+
+
+
+
+
     
-    app.get('/cart', async(req, res) =>{
-
-      const email = req.body;
+    app.get('/cart/:email', async (req, res) => {
+      const email = req.params.email;
       console.log(email);
-      const result = await cartCollection.find().toArray();
+      const query = { email: email };
+      const result = await cartCollection.find(query).toArray();
       console.log(result);
-        res.send(result);
+      res.send(result);
+    });
 
-    })
 
     app.post('/cart', async(req, res) => {
 
@@ -135,6 +148,21 @@ app.put('/update/:id', async(req, res) => {
       res.send(result)
 
     })
+
+
+
+
+    app.delete('/cart/:id', async(req, res) => {
+      const id = req.params.id
+      console.log(id);
+      const query = {_id : new ObjectId(id)}
+      // console.log(query);
+      const result = await cartCollection.deleteOne(query);
+      res.send(result);
+    })
+    
+
+
 
     
     // Send a ping to confirm a successful connection
